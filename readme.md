@@ -196,3 +196,53 @@ A few things to go through here. First of all for the laravel container:
         external:
         name: backend-network
 ```
+#### Now moving onto `mysql`
+* `mysql:5.7` is very configurable and just works well out-of-the-box. So we won't need to extend it.
+* Simply pick up the `.env` set in laravel app to set username and password for the db user:
+```
+    environment:
+        - MYSQL_ROOT_PASSWORD=securerootpassword
+        - MYSQL_DATABASE=${DB_DATABASE}
+        - MYSQL_USER=${DB_USERNAME}
+        - MYSQL_PASSWORD=${DB_PASSWORD}
+```
+
+ 
+ * Also make sure `.env` `DB_HOST` set to what mysql-db service name, or its aliases: `.env`
+
+ ```
+    DB_HOST=mysql-db
+ ```
+
+ * Ideally you want to keep database changes in the repository, using a series of migrations and seeders. However if you want to start the mysql container with an existing SQL dump, simply mount the SQL file:
+
+ ```
+    volumes:
+        - ./run/var:/var/lib/mysql
+        - ./run/dump/init.sql:/docker-entrypoint-initdb.d/init.sql
+ ```
+ * Using `volumes`, we're keeping the database locally under `run/var`, since any data written by `mysqld` is inside the container's `/var/lib/mysql`. We just need to ignore the local database in both `.gitignore` and `.dockerignore` (for build context):
+ **.gitignore**
+
+ ```
+    /node_modules
+    /public/hot
+    /public/storage
+    /storage/*.key
+    /vendor
+    .env
+    .phpunit.result.cache
+    Homestead.json
+    Homestead.yaml
+    npm-debug.log
+    yarn-error.log
+
+    run/var
+ ```
+ **.dockerignore**
+ ```
+    run/var
+ ```
+ ## Up and Running 
+ Now let's build the environment, and get it up running. We'll also be installing composer dependencies as well as some artisan command.
+ 
