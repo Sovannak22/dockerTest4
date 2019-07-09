@@ -224,6 +224,7 @@ A few things to go through here. First of all for the laravel container:
  * Using `volumes`, we're keeping the database locally under `run/var`, since any data written by `mysqld` is inside the container's `/var/lib/mysql`. We just need to ignore the local database in both `.gitignore` and `.dockerignore` (for build context):
  <br>
  <br>
+ 
  **.gitignore**
 
  ```
