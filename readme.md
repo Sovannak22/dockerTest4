@@ -1,5 +1,6 @@
 # Docker project with laravel using php mysql and apche2
-    ## Project Structure
+## Project Structure
+
     ```
         app
         |__bootstrap
