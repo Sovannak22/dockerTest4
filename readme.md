@@ -271,4 +271,13 @@ $ docker exec -it laravel-app bash -c "sudo -u devuser /bin/bash"
 <br>
 <br>
 
-**Note:** If you are running in ubuntu get any error try to make your docker non-root user access
+**Note:**
+```
+If you want to push your data for another developer with git remove or comment run directory inside **.gitignore** file
+```
+
+<br>
+
+```
+If you are running in ubuntu get any error try to make your docker non-root user access
+```
