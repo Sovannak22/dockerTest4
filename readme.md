@@ -266,4 +266,9 @@ Run this command to execute command inside container at project folder to run an
 ```
 $ docker exec -it laravel-app bash -c "sudo -u devuser /bin/bash"
 ```
+#### Now you can visit your website by url Example: `localhost:8000`
 
+<br>
+<br>
+
+**Note:** If you are running in ubuntu get any error try to make your docker non-root user access
