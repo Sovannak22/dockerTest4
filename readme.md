@@ -224,7 +224,7 @@ A few things to go through here. First of all for the laravel container:
  * Using `volumes`, we're keeping the database locally under `run/var`, since any data written by `mysqld` is inside the container's `/var/lib/mysql`. We just need to ignore the local database in both `.gitignore` and `.dockerignore` (for build context):
  <br>
  <br>
- 
+
  **.gitignore**
 
  ```
@@ -248,3 +248,22 @@ A few things to go through here. First of all for the laravel container:
  ```
  ## Up and Running 
  Now let's build the environment, and get it up running. We'll also be installing composer dependencies as well as some artisan command.
+
+<br>
+
+```
+    $ docker-compose build && docker-compose up -d && docker-compose logs -f
+```
+
+Once all the containers are up and running, we can check them by docker ps:
+```
+    CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                  NAMES
+    c1ae3002d260        laravel_laravel-app   "docker-php-entrypoi…"   4 minutes ago       Up 4 minutes        0.0.0.0:8000->80/tcp   laravel-app
+    6f6546224051        mysql:5.7             "docker-entrypoint.s…"   4 minutes ago       Up 4 minutes        3306/tcp               mysql-db
+```
+### Composer and artisan:
+Run this command to execute command inside container at project folder to run any command **Example:** `composer install` ,`php artisan migrate` 
+```
+$ docker exec -it laravel-app bash -c "sudo -u devuser /bin/bash"
+```
+
